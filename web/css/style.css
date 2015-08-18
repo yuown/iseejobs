@@ -182,7 +182,7 @@ ul a:focus {
 	opacity: 0;
 }
 .top-slide {
-	background: url(../images/bann2.jpg) no-repeat;
+/* 	background: url(../images/animation.swf) no-repeat; */
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
