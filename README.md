@@ -1,2 +1,2 @@
 # iseejobs
-A website for isesjobs.org
+A website for iseejobs.org
