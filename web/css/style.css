@@ -182,7 +182,7 @@ ul a:focus {
 	opacity: 0;
 }
 .top-slide {
-/* 	background: url(../images/animation.swf) no-repeat; */
+    background: url(../images/bann2.jpg) no-repeat;
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -192,7 +192,7 @@ ul a:focus {
 	
 }
 .top-slide h2 {
-	color: #85d6de;
+	color: #ff0000;
 	font-size: 2.5em;
 	font-weight: 400;
 	font-family: 'Varela Round', sans-serif;
