@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<security:global-method-security secured-annotations="enabled" authentication-manager-ref="yuownAuthenticationManagerForRest" />
+	
+    <security:http use-expressions="false" create-session="stateless" entry-point-ref="yuownAuthenticationEntryPoint" authentication-manager-ref="yuownAuthenticationManagerForRest" pattern="/rest/users/login">
+    	<security:intercept-url pattern="/rest/users/login" />
+        <security:access-denied-handler ref="yuownAuthenticationDeniedHandler" />
+        <security:custom-filter ref="yuownLoginFilter" position="FIRST" />
+        <security:csrf disabled="true" />
+    </security:http>
+    
+	<security:http use-expressions="true" create-session="stateless" entry-point-ref="yuownAuthenticationEntryPoint" authentication-manager-ref="yuownAuthenticationManagerForRest" pattern="/rest/**">
+
+		<security:access-denied-handler ref="yuownAuthenticationDeniedHandler" />
+		<security:custom-filter ref="yuownAuthenticationFilter" before="CSRF_FILTER" />
+		<security:csrf disabled="true" />
+	</security:http>
+	
+    <bean id="yuownLoginFilter" class="yuown.iseejobs.security.YuownLoginFilter">
+        <constructor-arg name="defaultFilterProcessesUrl" value="/rest/users/login" />
+        <property name="authenticationSuccessHandler" ref="yuownAuthenticationSuccessHandler" />
+    </bean>
+    <bean id="yuownAuthenticationFilter" class="yuown.iseejobs.security.YuownAuthenticationFilter" />
+    <bean id="yuownTokenAuthenticationService" class="yuown.iseejobs.security.YuownTokenAuthenticationService" />
+
+	<bean id="yuownAuthenticationEntryPoint" class="yuown.iseejobs.security.YuownAuthenticationEntryPoint" />
+	<bean id="yuownAuthenticationSuccessHandler" class="yuown.iseejobs.security.YuownAuthenticationSuccessHandler" />
+	<bean id="yuownAuthenticationDeniedHandler" class="yuown.iseejobs.security.YuownAuthenticationDeniedHandler" />
+
+	<bean id="jdbcUserDetailsManager" class="org.springframework.security.provisioning.JdbcUserDetailsManager">
+		<property name="dataSource" ref="dataSource" />
+		<property name="enableGroups" value="true" />
+		<property name="enableAuthorities" value="false" />
+<!-- 		<property name="rolePrefix" value="${YUOWNROLE}" /> -->
+		<property name="AuthenticationManager" ref="yuownAuthenticationManagerForRest" />
+	</bean>
+	<bean id="mappingJackson2HttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	<security:authentication-manager alias="yuownAuthenticationManagerForRest">
+		<security:authentication-provider user-service-ref="jdbcUserDetailsManager" />
+	</security:authentication-manager>
+
+</beans>
