@@ -1,10 +1,4 @@
-CREATE DATABASE `yuventory`;
-
-CREATE TABLE `categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
+CREATE DATABASE `iseejobs`;
 
 CREATE TABLE `configuration` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -13,76 +7,19 @@ CREATE TABLE `configuration` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `stock_type` (
+CREATE TABLE `education` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `method` varchar(10) DEFAULT NULL,
-  `remove` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `suppliers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `description` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `users` (
-  `id` int(11) DEFAULT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `enabled` tinyint(1) NOT NULL,
-  `full_name` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`username`)
-);
-
-CREATE TABLE `authorities` (
-  `username` varchar(50) NOT NULL,
-  `authority` varchar(50) NOT NULL,
-  UNIQUE KEY `authorities_idx_1` (`username`,`authority`),
-  CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
-);
-
-CREATE TABLE `items` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL,
-  `weight` double DEFAULT NULL,
-  `category` int(11) DEFAULT NULL,
-  `create_date` bigint(20) DEFAULT '0',
-  `update_date` bigint(20) DEFAULT '0',
-  `stock_type` int(11) DEFAULT NULL,
-  `user_entered` int(11) DEFAULT NULL,
-  `supplier` int(11) DEFAULT NULL,
-  `lend_to` int(11) DEFAULT NULL,
-  `lend_date` bigint(20) DEFAULT '0',
-  `lend_description` varchar(200) DEFAULT NULL,
-  `sold` tinyint(1) DEFAULT NULL,
+  `title` varchar(45) DEFAULT NULL,
+  `startmonth` int(11) DEFAULT NULL,
+  `startyear` int(11) DEFAULT NULL,
+  `endmonth` int(11) DEFAULT NULL,
+  `endyear` int(11) DEFAULT NULL,
+  `inprogress` tinyint(1) DEFAULT NULL,
+  `comments` varchar(200) DEFAULT NULL,
+  `profile_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `items2stock_type_idx` (`stock_type`),
-  KEY `items2supplier_idx` (`supplier`),
-  KEY `items2user_idx` (`user_entered`),
-  KEY `itemlendto` (`lend_to`),
-  KEY `item2category_idx` (`category`),
-  CONSTRAINT `item2category` FOREIGN KEY (`category`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `itemlendto` FOREIGN KEY (`lend_to`) REFERENCES `suppliers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `items2stock_type` FOREIGN KEY (`stock_type`) REFERENCES `stock_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `items2supplier` FOREIGN KEY (`supplier`) REFERENCES `suppliers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-);
-
-CREATE TABLE `persistent_logins` (
-  `username` varchar(64) NOT NULL,
-  `series` varchar(64) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `last_used` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`series`)
-);
-
-CREATE TABLE `groups` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `group_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+  KEY `education2profile_idx` (`profile_id`),
+  CONSTRAINT `education2profile` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 CREATE TABLE `group_authorities` (
@@ -92,8 +29,7 @@ CREATE TABLE `group_authorities` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   CONSTRAINT `group_authorities_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
-
+);
 
 CREATE TABLE `group_members` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -104,19 +40,46 @@ CREATE TABLE `group_members` (
   CONSTRAINT `group_members_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`)
 );
 
-INSERT INTO `yuventory`.`groups` (`id`, `group_name`) VALUES (1, 'USERS');
-INSERT INTO `yuventory`.`groups` (`id`, `group_name`) VALUES (2, 'ADMINS');
+CREATE TABLE `groups` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `group_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+);
 
-INSERT INTO `yuventory`.`group_members` (`id`, `username`, `group_id`) VALUES (1, 'user1', 1);
+CREATE TABLE `persistent_logins` (
+  `username` varchar(64) NOT NULL,
+  `series` varchar(64) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `last_used` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`series`)
+);
 
-INSERT INTO `yuventory`.`group_authorities` (`group_id`, `authority`) VALUES (1,"ROLE_SETTINGS");
-INSERT INTO `yuventory`.`group_authorities` (`group_id`, `authority`) VALUES (1,"ROLE_PRINT");
-INSERT INTO `yuventory`.`group_authorities` (`group_id`, `authority`) VALUES (1,"ROLE_DATAENTRY");
-INSERT INTO `yuventory`.`group_authorities` (`group_id`, `authority`) VALUES (1,"ROLE_REFERENCE_ENTRY");
-INSERT INTO `yuventory`.`group_authorities` (`group_id`, `authority`) VALUES (1,"ROLE_VIEW_ITEMS");
-INSERT INTO `yuventory`.`group_authorities` (`group_id`, `authority`) VALUES (1,"ROLE_LENDER");
-INSERT INTO `yuventory`.`group_authorities` (`group_id`, `authority`) VALUES (1,"ROLE_ITEM_RETURNER");
-INSERT INTO `yuventory`.`group_authorities` (`group_id`, `authority`) VALUES (1,"ROLE_SELLER");
-INSERT INTO `yuventory`.`group_authorities` (`group_id`, `authority`) VALUES (1,"ROLE_REPORTS");
-INSERT INTO `yuventory`.`group_authorities` (`group_id`, `authority`) VALUES (1,"ROLE_USER_MANAGER");
+CREATE TABLE `profile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(45) DEFAULT NULL,
+  `lastname` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `mobile` varchar(12) DEFAULT NULL,
+  `address` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
 
+CREATE TABLE `skills` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) DEFAULT NULL,
+  `comments` varchar(45) DEFAULT NULL,
+  `profile_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `skills2profile_idx` (`profile_id`),
+  CONSTRAINT `skills2profile` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+CREATE TABLE `users` (
+  `id` int(11) DEFAULT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  `full_name` varchar(50) DEFAULT NULL,
+  `profile_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+);
