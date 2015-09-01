@@ -5,7 +5,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE HTML>
-<html>
+<html ng-app="iseejobsApp">
 <head>
 <title>ISEE Staffing Solutions Pvt. Ltd., - Manpower Consulting | Talent Sourcing | Permanent and Temporary Staffing | Bangalore | India</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
@@ -19,6 +19,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
 <script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="app/angular/angular.js"></script>
+<script type="text/javascript" src="app/angular/angular-cookies.js"></script>
+<script type="text/javascript" src="app/angular/angular-route.js"></script>
+<script type="text/javascript" src="app/angular/angular-route-segment.js"></script>
+<script type="text/javascript" src="app/underscore/underscore.js"></script>
+<script type="text/javascript" src="app/bs/ui-bootstrap-tpls-0.13.2.js"></script>
+<script type="text/javascript" src="app/js/iseejobsApp.js"></script>
+<script type="text/javascript" src="app/js/httpProvider.js"></script>
+<script type="text/javascript" src="app/js/services.js"></script>
+<script type="text/javascript" src="app/js/stateProvider.js"></script>
+<script type="text/javascript" src="app/js/routeSegmentProvider.js"></script>
+<script type="text/javascript" src="app/js/library.js"></script>
+<script type="text/javascript" src="app/js/primary.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -62,19 +75,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="clearfix"> </div>
 			</div>
 		</div>
-						<!-- script-for-nav -->
-					<script>
-						$( "span.menu" ).click(function() {
-						  $( ".head-nav ul" ).slideToggle(300, function() {
-							// Animation complete.
-						  });
-						});
-					</script>
-				<!-- script-for-nav --> 	
-				<i class="line"> </i>
-				
+		<i class="line"> </i>
 	</div>	
-					
+	<div id="main-contents" app-view-segment="0"></div>
 <!-- footer -->
 	<div class="footer">
 		<div class="container">

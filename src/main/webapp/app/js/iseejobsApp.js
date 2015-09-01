@@ -1,0 +1,1 @@
+var iseejobsApp = angular.module("iseejobsApp", [ 'ngRoute', 'route-segment', 'view-segment', 'ngCookies', 'ui.bootstrap' ]);
