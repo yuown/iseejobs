@@ -9,6 +9,7 @@ iseejobsApp.config(function($routeSegmentProvider, $routeProvider) {
         when('/home/upload', 'home.upload').
         when('/home/download', 'home.download').
         when('/home/search', 'home.search').
+        when('/home/settings', 'home.settings').
         when('/home/users', 'home.users').
         when('/home/groups', 'home.groups').
         segment('login', {
@@ -29,6 +30,9 @@ iseejobsApp.config(function($routeSegmentProvider, $routeProvider) {
             }).
             segment('search', {
                 templateUrl : 'app/templates/search.html',
+            }).
+            segment('settings', {
+                templateUrl : 'app/settings/list.html',
             }).
             segment('users', {
                 templateUrl : 'app/users/list.html',

@@ -1,4 +1,4 @@
-<div ng-controller="AddUserController" ng-init="request.confirmPassword = request.password"> 
+<div ng-controller="AddProfileController"> 
     <div class="modal-header modal-header-primary">
         <h4 class="modal-title">{{title}}</h4>
     </div>
@@ -7,32 +7,38 @@
         <form ng-submit="save(request)" id="addForm">
 	        <div class="form-group">
                 <div class="input-group">
-                    <span class="input-group-addon">User Full Name</span>
-                    <input class="form-control" type="text" placeholder="Enter User Fullname" value="{{request.fullName}}" ng-model="request.fullName" required="required" maxlength="45" />
+                    <span class="input-group-addon">Firstname</span>
+                    <input class="form-control" type="text" placeholder="Firstname" value="{{request.firstname}}" ng-model="request.firstname" required="required" maxlength="45" />
                 </div>
             </div>
             <div class="form-group">
 	            <div class="input-group">
-	                <span class="input-group-addon">Username</span>
-	                <input class="form-control" type="text" placeholder="Enter Username" value="{{request.username}}" ng-model="request.username" required="required" maxlength="45" ng-readonly="request.id != null" />
+	                <span class="input-group-addon">Lastname</span>
+	                <input class="form-control" type="text" placeholder="Enter Username" value="{{request.lastname}}" ng-model="request.lastname" required="required" maxlength="45" />
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <div class="input-group">
+	                <span class="input-group-addon">email</span>
+	                <input class="form-control" type="email" placeholder="Enter Email" value="{{request.email}}" ng-model="request.email" required="required" maxlength="255" />
 	            </div>
 	        </div>
             <div class="form-group">
                 <div class="input-group">
-                    <span class="input-group-addon">Password</span>
-                    <input class="form-control" type="password" placeholder="New Password" value="{{request.password}}" ng-model="request.password" required="required" maxlength="45" />
+                    <span class="input-group-addon">Mobile</span>
+                    <input class="form-control" type="tel" placeholder="Enter Mobilenumber" value="{{request.mobile}}" ng-model="request.mobile" required="required" maxlength="15" />
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
-                    <span class="input-group-addon">Confirm Password</span>
-                    <input class="form-control" type="password" placeholder="Confirm New Password" value="{{request.confirmPassword}}" ng-model="request.confirmPassword" required="required" maxlength="45" />
+                    <span class="input-group-addon">Address</span>
+                    <textarea rows="5" class="form-control" placeholder="Enter Address" value="{{request.address}}" ng-model="request.address" required="required"></textarea>
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" ng-click="addDialog.dismiss('cancel')">Close</button>
-        <button type="submit" class="btn btn-primary" form="addForm" access="ROLE_REFERENCE_ENTRY">Save</button>
+        <button type="submit" class="btn btn-primary" form="addForm" access="ROLE_PROFILES">Save</button>
     </div>
 </div>
