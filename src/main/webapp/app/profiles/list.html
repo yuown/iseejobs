@@ -1,0 +1,28 @@
+<div ng-controller='ProfilesController' ng-init="load()" access="ROLE_PROFILES" class="container">
+    <div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
+    <div>
+        <button type="button" class="btn btn-primary" ng-click="add()" access="ROLE_PROFILES">Add</button>
+        <button type="button" class="btn btn-info" ng-click="load()">Refresh</button>
+    </div>
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr class="info table-row">
+					<th>FirstName</th>
+					<th>LastName</th>
+					<th access="ROLE_PROFILES">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="profile in profiles" class="table-row">
+					<td>{{profile.firstname}}</td>
+					<td>{{profile.lastname}}</td>
+					<td access="ROLE_PROFILES">
+						<button type='button' class='btn btn-success' ng-click="add(user)" access="ROLE_PROFILES">Edit</button>
+						<button type='button' class='btn btn-danger' ng-click="deleteRecord(user)" access="ROLE_PROFILES">Delete</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -8,7 +8,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html ng-app="iseejobsApp">
 <head>
 <title>ISEE Staffing Solutions Pvt. Ltd., - Manpower Consulting | Talent Sourcing | Permanent and Temporary Staffing | Bangalore | India</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="app/bs/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="app/bs/bootstrap-theme.css" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,12 +19,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
-<script src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="app/css/iseejobs.css" type="text/css" media="screen" />
+<script src="js/jquery-2.1.4.js"></script>
 <script type="text/javascript" src="app/angular/angular.js"></script>
 <script type="text/javascript" src="app/angular/angular-cookies.js"></script>
 <script type="text/javascript" src="app/angular/angular-route.js"></script>
 <script type="text/javascript" src="app/angular/angular-route-segment.js"></script>
 <script type="text/javascript" src="app/underscore/underscore.js"></script>
+<script type="text/javascript" src="app/bs/bootstrap.js"></script>
 <script type="text/javascript" src="app/bs/ui-bootstrap-tpls-0.13.2.js"></script>
 <script type="text/javascript" src="app/js/iseejobsApp.js"></script>
 <script type="text/javascript" src="app/js/httpProvider.js"></script>
@@ -32,6 +35,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="app/js/routeSegmentProvider.js"></script>
 <script type="text/javascript" src="app/js/library.js"></script>
 <script type="text/javascript" src="app/js/primary.js"></script>
+<script type="text/javascript" src="app/alerts/controllers.js"></script>
+<script type="text/javascript" src="app/users/controllers.js"></script>
+<script type="text/javascript" src="app/profiles/controllers.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -68,7 +74,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href="services.html" data-hover="SERVICES">SERVICES</a></li>
 								<li><a href="portfolio.html" data-hover="JOBSEEKERS">JOBSEEKERS</a></li>
 								<li><a href="404.html" data-hover="CLIENTS">CLIENTS</a></li>
-								<li><a href="#/logout" data-hover="Logout">Logout</a></li>
+								<li><a href="app.html#/home" data-hover="ADMINS">ADMINS</a></li>
 									<div class="clearfix"> </div>
 							</ul>
 				</div>

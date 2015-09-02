@@ -1,0 +1,28 @@
+<div ng-controller="AlertsSellController"> 
+    <div class="modal-header modal-header-danger">
+        <h4 class="modal-title">{{title}}</h4>
+    </div>
+    <div class="modal-body">
+	    <form ng-submit="submitOption('yes', confirmCallback)" id="formConfirmSell">
+	        <div class="form-group">
+	            <div class="input-group">
+	                <span class="input-group-addon">Reason</span>
+	                <select class="form-control" ng-options="stockType.id as stockType.name for stockType in stockTypes" ng-model="clonedRequest.stockType" ng-change="showHideDeleteMessage()" ng-required="true">
+	                   <option value="">Select a Reason</option>
+	                </select>
+	            </div>
+	        </div>
+	        <div class="form-group" ng-show="deleteFromStock==false">
+	            <div class="input-group">
+	                <span class="input-group-addon">Sell to</span>
+	                <select class="form-control" ng-options="lendTo.id as lendTo.name for lendTo in lendTos" ng-model="clonedRequest.lendTo"></select>
+	            </div>
+	        </div>
+	        <div class="alert alert-danger" ng-show="deleteFromStock==true">Item will be deleted from Stock!</div>
+	    </form>
+	</div>
+    <div class="modal-footer">
+        <button class="btn btn-danger btn-large glyphicon glyphicon-remove" ng-click="submitOption('no')"> No</button>
+        <button type="submit" class="btn btn-success btn-large glyphicon glyphicon-ok" form="formConfirmSell"> Yes</button>
+    </div>
+</div>

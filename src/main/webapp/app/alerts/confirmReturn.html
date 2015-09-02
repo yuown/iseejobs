@@ -1,0 +1,21 @@
+<div ng-controller="AlertsLendController"> 
+    <div class="modal-header modal-header-danger">
+        <h4 class="modal-title">{{title}}</h4>
+    </div>
+    <div class="modal-body">
+	    <form ng-submit="submitOption('yes', confirmCallback)" id="formConfirmReturn">
+	        <div class="form-group">
+	            <div class="input-group">
+	                <span class="input-group-addon">Reason</span>
+	                <select class="form-control" ng-options="stockType.id as stockType.name for stockType in stockTypes" ng-model="clonedRequest.stockType" ng-required="true">
+	                    <option value="">Select a Reason</option>
+	                </select>
+	            </div>
+	        </div>
+	    </form>
+	</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-large glyphicon glyphicon-remove" ng-click="submitOption('no')"> No</button>
+        <button type="submit" class="btn btn-success btn-large glyphicon glyphicon-ok" form="formConfirmReturn"> Yes</button>
+    </div>
+</div>

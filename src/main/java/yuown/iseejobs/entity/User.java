@@ -6,9 +6,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -35,8 +33,6 @@ public class User extends BaseEntity<Integer> implements Serializable {
 	private boolean enabled;
 
 	private String fullName;
-
-	private Profile profile;
 
 	public String getUsername() {
 		return username;
@@ -79,15 +75,6 @@ public class User extends BaseEntity<Integer> implements Serializable {
 	@Override
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	@OneToOne(targetEntity = Profile.class, fetch = FetchType.LAZY)
-	public Profile getProfile() {
-		return profile;
-	}
-
-	public void setProfile(Profile profile) {
-		this.profile = profile;
 	}
 
 	@Override

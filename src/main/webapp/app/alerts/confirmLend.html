@@ -1,0 +1,33 @@
+<div ng-controller="AlertsLendController"> 
+    <div class="modal-header modal-header-danger">
+        <h4 class="modal-title">{{title}}</h4>
+    </div>
+    <div class="modal-body">
+	    <form ng-submit="submitOption('yes', confirmCallback)" id="formConfirmLend">
+			<div class="form-group">
+	            <div class="input-group">
+	                <span class="input-group-addon">Lend to</span>
+	                <select class="form-control" ng-options="lendTo.id as lendTo.name for lendTo in lendTos" ng-model="clonedRequest.lendTo" ng-required="true"></select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <div class="input-group">
+	                <span class="input-group-addon">Reason</span>
+	                <select class="form-control" ng-options="stockType.id as stockType.name for stockType in stockTypes" ng-model="clonedRequest.stockType" ng-required="true">
+	                   <option value="">Select a Reason</option>
+	                </select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <div class="input-group">
+	                <span class="input-group-addon">Lend Description</span>
+	                <textarea rows="4" ng-model="clonedRequest.lendDescription" class="form-control" ng-required="true"></textarea>
+	            </div>
+	        </div>
+	    </form>
+	</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-large glyphicon glyphicon-remove" ng-click="submitOption('no')"> No</button>
+        <button type="submit" class="btn btn-success btn-large glyphicon glyphicon-ok" form="formConfirmLend"> Yes</button>
+    </div>
+</div>
