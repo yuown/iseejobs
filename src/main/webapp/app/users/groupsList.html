@@ -1,4 +1,4 @@
-<div ng-controller='GroupsController' ng-init="loadGroups()" access="ROLE_USER_MANAGER">
+<div ng-controller='GroupsController' ng-init="loadGroups()" access="ROLE_USER_MANAGER" class="container">
     <div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
     <div>
         <button type="button" class="btn btn-primary" ng-click="add()" access="ROLE_USER_MANAGER">Add</button>

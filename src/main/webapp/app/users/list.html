@@ -1,4 +1,4 @@
-<div ng-controller='UsersController' ng-init="load()" access="ROLE_USER_MANAGER">
+<div ng-controller='UsersController' ng-init="load()" access="ROLE_USER_MANAGER" class="container">
     <div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
     <div>
         <button type="button" class="btn btn-primary" ng-click="add()" access="ROLE_USER_MANAGER">Add</button>
@@ -15,7 +15,7 @@
 			<tbody>
 				<tr ng-repeat="user in users" class="table-row">
 					<td>{{user.fullName}}</td>
-					<td access="ROLE_REFERENCE_ENTRY">
+					<td access="ROLE_USER_MANAGER">
 						<button type='button' class='btn btn-success' ng-click="add(user)" access="ROLE_USER_MANAGER">Edit</button>
 						<button type='button' class='btn btn-danger' ng-click="deleteRecord(user)" access="ROLE_USER_MANAGER">Delete</button>
 						<switch ng-model="user.enabled" enable-text="Enable" disable-text="Disable" callback="enableUser(user)" />

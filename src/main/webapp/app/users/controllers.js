@@ -15,7 +15,7 @@ iseejobsApp.controller('UsersController', [ '$scope', 'AjaxService', '$modal', '
         };
         $scope.title = $scope.request.id == null ? "Add User" : "Edit User";
         $scope.addDialog = $modal.open({
-            templateUrl : 'users/add.html',
+            templateUrl : 'app/users/add.html',
             scope : $scope
         });
     };
@@ -67,7 +67,7 @@ iseejobsApp.controller('GroupsController', [ '$scope', 'AjaxService', '$modal', 
             name : ""
         };
         $scope.addDialog = $modal.open({
-            templateUrl : 'users/addGroup.html',
+            templateUrl : 'app/users/addGroup.html',
             scope : $scope
         });
     };
@@ -88,7 +88,7 @@ iseejobsApp.controller('GroupsController', [ '$scope', 'AjaxService', '$modal', 
 		});
         
         $scope.addDialog = $modal.open({
-            templateUrl : 'users/authorities.html',
+            templateUrl : 'app/users/authorities.html',
             scope : $scope
         });
     };
@@ -105,7 +105,7 @@ iseejobsApp.controller('GroupsController', [ '$scope', 'AjaxService', '$modal', 
     $scope.showGroupUsers = function(group) {
         $scope.group = group;
         $scope.addDialog = $modal.open({
-            templateUrl : 'users/groupUsers.html',
+            templateUrl : 'app/users/groupUsers.html',
             scope : $scope
         });
     };
@@ -161,7 +161,7 @@ iseejobsApp.controller('GroupUsersController', [ '$scope', 'AjaxService', '$moda
     $scope.addUserToGroup = function(currentUsers) {
         $scope.currentUsers = currentUsers;
         $scope.addUserToGroupPopup = $modal.open({
-            templateUrl : 'users/groupUsersPopup.html',
+            templateUrl : 'app/users/groupUsersPopup.html',
             scope : $scope
         });
     };
