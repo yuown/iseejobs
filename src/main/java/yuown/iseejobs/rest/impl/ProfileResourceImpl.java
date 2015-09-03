@@ -1,8 +1,6 @@
 package yuown.iseejobs.rest.impl;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import yuown.iseejobs.business.services.ProfileService;
-import yuown.iseejobs.business.services.SkillService;
 import yuown.iseejobs.entity.Profile;
 import yuown.iseejobs.model.ProfileModel;
-import yuown.iseejobs.model.SkillModel;
 
 @RestController
 @RequestMapping(value = "/profiles", produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -32,12 +28,11 @@ public class ProfileResourceImpl {
 	@Autowired
 	private ProfileService profileService;
 
-	@Autowired
-	private SkillService skillService;
-
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<List<ProfileModel>> getAllProfiles(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {
+	public ResponseEntity<List<ProfileModel>> getAllProfiles(
+			@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size) {
 		HttpHeaders headers = new HttpHeaders();
 		PageImpl<Profile> pagedprofiles = profileService.getAll(page, size);
 		List<ProfileModel> profiles = profileService.transformer().transformTo(pagedprofiles.getContent());
@@ -78,17 +73,6 @@ public class ProfileResourceImpl {
 		}
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/{id}/skills")
-	@ResponseBody
-	public Set<SkillModel> getProfileSkills(@PathVariable("id") int id) {
-		Set<SkillModel> skills = new HashSet<SkillModel>();
-		ProfileModel profile = profileService.getById(id);
-		if (null != profile) {
-			// skills = skillService.getSkills();
-		}
-		return skills;
-	}
-	
 	@RequestMapping(method = RequestMethod.POST, value = "/pageSize")
 	public void setPageSize(@RequestBody Integer size) {
 		profileService.setPageSize(size);

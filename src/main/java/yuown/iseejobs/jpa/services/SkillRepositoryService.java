@@ -38,4 +38,8 @@ public class SkillRepositoryService extends AbstractRepositoryService<SkillRepos
 	public Skill save(Skill entity) {
 		return super.save(entity);
 	}
+	
+	public List<Skill> findAllByProfileId(Integer profileId) {
+		return repository().findAllByProfileId(profileId);
+	}
 }

@@ -38,4 +38,8 @@ public class EducationRepositoryService extends AbstractRepositoryService<Educat
 	public Education save(Education entity) {
 		return super.save(entity);
 	}
+
+	public List<Education> findAllByProfileId(Integer profileId) {
+		return repository().findAllByProfileId(profileId);
+	}
 }

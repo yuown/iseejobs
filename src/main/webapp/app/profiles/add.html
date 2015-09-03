@@ -1,10 +1,10 @@
-<div ng-controller="AddProfileController"> 
+<div ng-controller="AddProfileController" ng-init="init(request)"> 
     <div class="modal-header modal-header-primary">
         <h4 class="modal-title">{{title}}</h4>
     </div>
     <div class="modal-body">
         <div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
-        <form ng-submit="save(request)" id="addForm">
+        <form ng-submit="save(request, skills, educations)" id="addForm">
             <div class="row">
 		        <div class="form-group col-xs-6">
 	                <div class="input-group">
@@ -22,7 +22,7 @@
 	        <div class="row">
 		        <div class="form-group col-xs-6">
 		            <div class="input-group">
-		                <span class="input-group-addon">email</span>
+		                <span class="input-group-addon">Email</span>
 		                <input class="form-control" type="email" placeholder="Enter Email" ng-value="request.email" ng-model="request.email" required="required" maxlength="255" />
 		            </div>
 		        </div>
@@ -41,7 +41,74 @@
 	                </div>
 	            </div>
             </div>
-        </form>
+			<div class="form-group panel panel-info">
+			    <div class="panel-heading">
+				    <button type="button" class="btn btn-info close" aria-hidden="true" ng-click="addEducation(educations)">+</button>
+					<label>Educations</label>
+				</div>
+				<div class="panel-body">
+					<div class="row panel panel-default" ng-repeat="education in educations">
+						<div class="form-group col-xs-12">
+							<button type="button" class="btn btn-danger close" aria-hidden="true" ng-click="confirmRemoveEducation(request, education)">&times;</button>
+						</div>
+						<div class="form-group col-xs-6">
+							<div class="input-group">
+								<span class="input-group-addon">Degree</span>
+								<input class="form-control" type="text" placeholder="Degree" ng-value="education.degree" ng-model="education.degree" required="required" maxlength="15" />
+							</div>
+						</div>
+						<div class="form-group col-xs-6">
+							<div class="input-group">
+								<span class="input-group-addon">Specialization</span>
+								<input class="form-control" type="text" placeholder="Degree" ng-value="education.specialization" ng-model="education.specialization" required="required" maxlength="15" />
+							</div>
+						</div>
+						<div class="form-group col-xs-6">
+							<div class="input-group">
+								<span class="input-group-addon">Start</span>
+								<select class="form-control" ng-model="education.startMonth" ng-options="months.indexOf(m) as m for m in months"></select>
+								<span class="input-group-addon">/</span>
+								<select class="form-control" ng-model="education.startYear"  ng-options="sY for sY in [] | range:1950:2100"></select>
+							</div>
+						</div>
+						<div class="form-group col-xs-6">
+							<div class="input-group">
+								<span class="input-group-addon">End</span>
+								<select class="form-control" ng-model="education.endMonth" ng-options="months.indexOf(m) as m for m in months"></select>
+								<span class="input-group-addon">/</span>
+								<select class="form-control" ng-model="education.endYear"  ng-options="eY for eY in [] | range:1950:2100"></select>
+							</div>
+						</div>
+						<div class="form-group col-xs-6">
+							<div class="input-group">
+								<label><input type="checkbox" ng-value="education.inProgress" ng-model="education.inProgress" /> Still Studying ?</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group panel panel-info">
+			    <div class="panel-heading">
+				    <button type="button" class="btn btn-info close" aria-hidden="true" ng-click="addSkill(skills)">+</button>
+					<label>Skills</label>
+				</div>
+				<div class="panel-body">
+					<div class="row" ng-repeat="skill in skills">
+						<div class="form-group col-xs-12">
+							<div class="input-group">
+								<span class="input-group-addon">Title</span>
+								<input class="form-control" type="text" placeholder="Skill Title" ng-value="skill.title" ng-model="skill.title" required="required" maxlength="15" />
+								<span class="input-group-addon">Comment</span>
+								<input class="form-control" type="text" placeholder="Skill Comments" ng-value="skill.comments" ng-model="skill.comments" required="required" maxlength="85" />
+								<span class="input-group-addon">
+		                        	<button type="button" class="btn btn-danger close" aria-hidden="true" ng-click="confirmRemoveSkill(request, skill)">&times;</button>
+		                        </span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" ng-click="addDialog.dismiss('cancel')">Close</button>

@@ -6,11 +6,9 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -21,19 +19,20 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @Entity
 @Table(name = "education", uniqueConstraints = @UniqueConstraint(columnNames = { "id" }))
 @AttributeOverrides(value = { @AttributeOverride(name = "id", column = @Column(name = "ID", insertable = false, updatable = false)),
-		@AttributeOverride(name = "title", column = @Column(name = "title")),
+		@AttributeOverride(name = "degree", column = @Column(name = "degree")),
 		@AttributeOverride(name = "startmonth", column = @Column(name = "startmonth")),
 		@AttributeOverride(name = "startyear", column = @Column(name = "startyear")),
 		@AttributeOverride(name = "endmonth", column = @Column(name = "endmonth")),
 		@AttributeOverride(name = "endyear", column = @Column(name = "endyear")),
 		@AttributeOverride(name = "inprogress", column = @Column(name = "inprogress")),
-		@AttributeOverride(name = "comments", column = @Column(name = "comments"))
+		@AttributeOverride(name = "specialization", column = @Column(name = "specialization")),
+		@AttributeOverride(name = "profileId", column = @Column(name = "profile_id"))
 })
 public class Education extends BaseEntity<Integer> implements Serializable {
 
 	private static final long serialVersionUID = 4289151143888117381L;
 
-	private String title;
+	private String degree;
 
 	private int startMonth;
 
@@ -45,9 +44,9 @@ public class Education extends BaseEntity<Integer> implements Serializable {
 
 	private boolean inProgress;
 
-	private String comments;
+	private String specialization;
 
-	private Profile profile;
+	private Integer profileId;
 
 	@Override
 	@Id
@@ -61,13 +60,12 @@ public class Education extends BaseEntity<Integer> implements Serializable {
 		this.id = id;
 	}
 
-	@OneToOne(targetEntity = Profile.class, fetch = FetchType.EAGER)
-	public Profile getProfile() {
-		return profile;
+	public Integer getProfileId() {
+		return profileId;
 	}
 
-	public void setProfile(Profile profile) {
-		this.profile = profile;
+	public void setProfileId(Integer profileId) {
+		this.profileId = profileId;
 	}
 
 	@Override
@@ -92,8 +90,8 @@ public class Education extends BaseEntity<Integer> implements Serializable {
 		return (new EqualsBuilder()).append(this.id, rhs.id).isEquals();
 	}
 
-	public String getTitle() {
-		return title;
+	public String getDegree() {
+		return degree;
 	}
 
 	public int getStartMonth() {
@@ -116,12 +114,12 @@ public class Education extends BaseEntity<Integer> implements Serializable {
 		return inProgress;
 	}
 
-	public String getComments() {
-		return comments;
+	public String getSpecialization() {
+		return specialization;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setDegree(String degree) {
+		this.degree = degree;
 	}
 
 	public void setStartMonth(int startMonth) {
@@ -144,7 +142,7 @@ public class Education extends BaseEntity<Integer> implements Serializable {
 		this.inProgress = inProgress;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
 	}
 }

@@ -54,27 +54,27 @@ CREATE TABLE `profile` (
 
 CREATE TABLE `skills` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) DEFAULT NULL,
-  `comments` varchar(45) DEFAULT NULL,
+  `title` varchar(15) DEFAULT NULL,
+  `comments` varchar(85) DEFAULT NULL,
   `profile_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `skills2profile_idx` (`profile_id`),
-  CONSTRAINT `skills2profile` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `skills2profile` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
 CREATE TABLE `education` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) DEFAULT NULL,
+  `degree` varchar(15) DEFAULT NULL,
   `startmonth` int(11) DEFAULT NULL,
   `startyear` int(11) DEFAULT NULL,
   `endmonth` int(11) DEFAULT NULL,
   `endyear` int(11) DEFAULT NULL,
   `inprogress` tinyint(1) DEFAULT NULL,
-  `comments` varchar(200) DEFAULT NULL,
+  `specialization` varchar(85) DEFAULT NULL,
   `profile_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `education2profile_idx` (`profile_id`),
-  CONSTRAINT `education2profile` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `education2profile` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
 CREATE TABLE `configuration` (

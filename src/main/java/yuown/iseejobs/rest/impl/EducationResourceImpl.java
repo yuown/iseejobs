@@ -15,39 +15,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import yuown.iseejobs.business.services.EducationService;
 import yuown.iseejobs.business.services.ProfileService;
-import yuown.iseejobs.business.services.SkillService;
+import yuown.iseejobs.model.EducationModel;
 import yuown.iseejobs.model.ProfileModel;
-import yuown.iseejobs.model.SkillModel;
 
 @RestController
-@RequestMapping(value = "/skills", produces = { MediaType.APPLICATION_JSON_VALUE })
-public class SkillResourceImpl {
+@RequestMapping(value = "/educations", produces = { MediaType.APPLICATION_JSON_VALUE })
+public class EducationResourceImpl {
 
 	@Autowired
-	private SkillService skillService;
-	
+	private EducationService educationService;
+
 	@Autowired
 	private ProfileService profileService;
 
 	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
-	public SkillModel save(@RequestBody SkillModel model) {
-		return skillService.save(model);
+	public EducationModel save(@RequestBody EducationModel model) {
+		return educationService.save(model);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody
-	public SkillModel getById(@PathVariable("id") int id) {
-		return skillService.getById(id);
+	public EducationModel getById(@PathVariable("id") int id) {
+		return educationService.getById(id);
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, value = "/{skillId}/{profileId}")
-	public ResponseEntity<String> removeById(@PathVariable("skillId") int skillId, @PathVariable("profileId") int profileId) throws Exception {
-		SkillModel skill = skillService.getById(skillId);
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{educationId}/{profileId}")
+	public ResponseEntity<String> removeById(@PathVariable("educationId") int educationId, @PathVariable("profileId") int profileId) throws Exception {
+		EducationModel education = educationService.getById(educationId);
 		HttpHeaders headers = new HttpHeaders();
-		if (null == skill) {
-			headers.add("errorMessage", "Skill with ID " + skillId + " Not Found");
+		if (null == education) {
+			headers.add("errorMessage", "Education with ID " + educationId + " Not Found");
 			return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
 		} else {
 			try {
@@ -56,33 +56,33 @@ public class SkillResourceImpl {
 					headers.add("errorMessage", "Profile with ID " + profileId + " Not Found");
 					return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
 				} else {
-					skillService.removeById(skillId);
-					headers.add("errorMessage", "Skill with ID " + skillId + " Deleted Successfully");
+					educationService.removeById(educationId);
+					headers.add("errorMessage", "Education with ID " + educationId + " Deleted Successfully");
 					return new ResponseEntity<String>(headers, HttpStatus.OK);
 				}
 			} catch (Exception e) {
-				headers.add("errorMessage", "Skill with ID " + skillId + " cannot be Deleted");
+				headers.add("errorMessage", "Education with ID " + educationId + " cannot be Deleted");
 				return new ResponseEntity<String>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "profile/{id}")
 	@ResponseBody
-	public List<SkillModel> getProfileSkills(@PathVariable("id") int id) {
-		List<SkillModel> skills = new ArrayList<SkillModel>();
+	public List<EducationModel> getProfileEducations(@PathVariable("id") int id) {
+		List<EducationModel> educations = new ArrayList<EducationModel>();
 		ProfileModel profile = profileService.getById(id);
 		if (null != profile) {
-			 skills = skillService.getSkills(profile.getId());
+			educations = educationService.getEducations(profile.getId());
 		}
-		return skills;
+		return educations;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "profile/{id}")
-	public void saveProfileSkills(@PathVariable("id") int profileId, @RequestBody List<SkillModel> skills) {
+	public void saveProfileEducations(@PathVariable("id") int profileId, @RequestBody List<EducationModel> educations) {
 		ProfileModel profile = profileService.getById(profileId);
 		if (null != profile) {
-			 skillService.saveSkills(profileId, skills);
+			educationService.saveEducations(profileId, educations);
 		}
 	}
 }

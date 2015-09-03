@@ -1,7 +1,5 @@
 package yuown.iseejobs.model;
 
-import java.util.Set;
-
 public class ProfileModel extends Model {
 
 	/**
@@ -18,10 +16,6 @@ public class ProfileModel extends Model {
 	private String mobile;
 
 	private String address;
-
-	private Set<SkillModel> skills;
-	
-	private Set<EducationModel> educations;
 
 	public String getFirstname() {
 		return firstname;
@@ -43,10 +37,6 @@ public class ProfileModel extends Model {
 		return address;
 	}
 
-	public Set<SkillModel> getSkills() {
-		return skills;
-	}
-
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
@@ -65,17 +55,5 @@ public class ProfileModel extends Model {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public void setSkills(Set<SkillModel> skills) {
-		this.skills = skills;
-	}
-
-	public Set<EducationModel> getEducations() {
-		return educations;
-	}
-
-	public void setEducations(Set<EducationModel> educations) {
-		this.educations = educations;
 	}
 }

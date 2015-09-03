@@ -3,11 +3,11 @@ package yuown.iseejobs.model;
 public class EducationModel extends Model {
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private static final long serialVersionUID = -3340859196299627969L;
 
-	private String title;
+	private String degree;
 
 	private int startMonth;
 
@@ -19,71 +19,71 @@ public class EducationModel extends Model {
 
 	private boolean inProgress;
 
-	private String comments;
+	private String specialization;
 
-	private ProfileModel profile;
+	private Integer profileId;
 
-	public String getTitle() {
-		return title;
+	public String getDegree() {
+		return degree;
+	}
+
+	public void setDegree(String degree) {
+		this.degree = degree;
 	}
 
 	public int getStartMonth() {
 		return startMonth;
 	}
 
-	public int getStartYear() {
-		return startYear;
-	}
-
-	public int getEndMonth() {
-		return endMonth;
-	}
-
-	public int getEndYear() {
-		return endYear;
-	}
-
-	public boolean isInProgress() {
-		return inProgress;
-	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public ProfileModel getProfile() {
-		return profile;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public void setStartMonth(int startMonth) {
 		this.startMonth = startMonth;
+	}
+
+	public int getStartYear() {
+		return startYear;
 	}
 
 	public void setStartYear(int startYear) {
 		this.startYear = startYear;
 	}
 
+	public int getEndMonth() {
+		return endMonth;
+	}
+
 	public void setEndMonth(int endMonth) {
 		this.endMonth = endMonth;
+	}
+
+	public int getEndYear() {
+		return endYear;
 	}
 
 	public void setEndYear(int endYear) {
 		this.endYear = endYear;
 	}
 
+	public boolean isInProgress() {
+		return inProgress;
+	}
+
 	public void setInProgress(boolean inProgress) {
 		this.inProgress = inProgress;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
+	public String getSpecialization() {
+		return specialization;
 	}
 
-	public void setProfile(ProfileModel profile) {
-		this.profile = profile;
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
+	}
+
+	public Integer getProfileId() {
+		return profileId;
+	}
+
+	public void setProfileId(Integer profileId) {
+		this.profileId = profileId;
 	}
 }

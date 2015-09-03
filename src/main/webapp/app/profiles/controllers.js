@@ -28,7 +28,8 @@ iseejobsApp.controller('ProfilesController', [ '$scope', 'AjaxService', '$modal'
         $scope.title = $scope.request.id == null ? "Add Profile" : "Edit Profile";
         $scope.addDialog = $modal.open({
             templateUrl : 'app/profiles/add.html',
-            scope : $scope
+            scope : $scope,
+            size: 'lg'
         });
     };
     
@@ -42,15 +43,61 @@ iseejobsApp.controller('ProfilesController', [ '$scope', 'AjaxService', '$modal'
     
 } ]);
 
-iseejobsApp.controller('AddProfileController', [ '$scope', 'AjaxService', function($scope, AjaxService) {
+iseejobsApp.controller('AddProfileController', [ '$scope', 'AjaxService', 'AlertsService', function($scope, AjaxService, AlertsService) {
     'use strict';
     
-    $scope.save = function(request) {
-        AjaxService.call('profiles', 'POST', request).success(function(data, status, headers, config) {
+    $scope.init = function(request) {
+    	$scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    	if(request && request.id != null) {
+    		AjaxService.call('skills/profile/' + request.id, 'GET').success(function(data, status, headers, config) {
+                $scope.skills = data;
+            });
+    		AjaxService.call('educations/profile/' + request.id, 'GET').success(function(data, status, headers, config) {
+                $scope.educations = data;
+            });
+    	}
+    };
+    
+    $scope.addSkill = function(skills) {
+    	skills.push({'title': '', 'comments': ''});
+    };
+    
+    $scope.addEducation = function(educations) {
+    	educations.push({'title': '', 'comments': ''});
+    };
+    
+    $scope.save = function(profile, skills, educations) {
+        AjaxService.call('profiles', 'POST', profile).success(function(data, status, headers, config) {
             $scope.request = data;
+            AjaxService.call('skills/profile/' + profile.id, 'POST', skills);
+            AjaxService.call('educations/profile/' + profile.id, 'POST', educations);
             $scope.addDialog.dismiss('cancel');
             $scope.load($scope.currentPage);
         });
     };
+    
+    $scope.confirmRemoveEducation = function(profile, education) {
+    	if(education.id != null) {
+    		AlertsService.confirm('Are you sure to delete this group ?', function() {
+                AjaxService.call('educations/' + education.id + '/' + profile.id, 'DELETE').success(function(data, status, headers, config) {
+                	$scope.educations.splice($scope.educations.indexOf(education), 1);
+                });
+            });
+    	} else {
+    		$scope.educations.splice($scope.educations.indexOf(education), 1);
+    	}
+    }
+    
+    $scope.confirmRemoveSkill = function(profile, skill) {
+    	if(skill.id != null) {
+    		AlertsService.confirm('Are you sure to delete this group ?', function() {
+                AjaxService.call('skills/' + skill.id + '/' + profile.id, 'DELETE').success(function(data, status, headers, config) {
+                	$scope.skills.splice($scope.skills.indexOf(skill), 1);
+                });
+            });
+    	} else {
+    		$scope.skills.splice($scope.skills.indexOf(skill), 1);
+    	}
+    }
     
 } ]);
