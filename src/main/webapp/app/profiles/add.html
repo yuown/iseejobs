@@ -5,35 +5,41 @@
     <div class="modal-body">
         <div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
         <form ng-submit="save(request)" id="addForm">
-	        <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon">Firstname</span>
-                    <input class="form-control" type="text" placeholder="Firstname" value="{{request.firstname}}" ng-model="request.firstname" required="required" maxlength="45" />
-                </div>
-            </div>
-            <div class="form-group">
-	            <div class="input-group">
-	                <span class="input-group-addon">Lastname</span>
-	                <input class="form-control" type="text" placeholder="Enter Username" value="{{request.lastname}}" ng-model="request.lastname" required="required" maxlength="45" />
+            <div class="row">
+		        <div class="form-group col-xs-6">
+	                <div class="input-group">
+	                    <span class="input-group-addon">Firstname</span>
+	                    <input class="form-control" type="text" placeholder="Firstname" value="{{request.firstname}}" ng-model="request.firstname" required="required" maxlength="45" />
+	                </div>
 	            </div>
+	            <div class="form-group col-xs-6">
+		            <div class="input-group">
+		                <span class="input-group-addon">Lastname</span>
+		                <input class="form-control" type="text" placeholder="Enter Username" value="{{request.lastname}}" ng-model="request.lastname" required="required" maxlength="45" />
+		            </div>
+		        </div>
 	        </div>
-	        <div class="form-group">
-	            <div class="input-group">
-	                <span class="input-group-addon">email</span>
-	                <input class="form-control" type="email" placeholder="Enter Email" value="{{request.email}}" ng-model="request.email" required="required" maxlength="255" />
+	        <div class="row">
+		        <div class="form-group col-xs-6">
+		            <div class="input-group">
+		                <span class="input-group-addon">email</span>
+		                <input class="form-control" type="email" placeholder="Enter Email" ng-value="request.email" ng-model="request.email" required="required" maxlength="255" />
+		            </div>
+		        </div>
+	            <div class="form-group col-xs-6">
+	                <div class="input-group">
+	                    <span class="input-group-addon">Mobile</span>
+	                    <input class="form-control" type="tel" placeholder="Enter Mobilenumber" value="{{request.mobile}}" ng-model="request.mobile" required="required" maxlength="15" />
+	                </div>
 	            </div>
-	        </div>
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon">Mobile</span>
-                    <input class="form-control" type="tel" placeholder="Enter Mobilenumber" value="{{request.mobile}}" ng-model="request.mobile" required="required" maxlength="15" />
-                </div>
             </div>
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon">Address</span>
-                    <textarea rows="5" class="form-control" placeholder="Enter Address" value="{{request.address}}" ng-model="request.address" required="required"></textarea>
-                </div>
+            <div class="row">
+	            <div class="form-group col-xs-12">
+	                <div class="input-group">
+	                    <span class="input-group-addon">Address</span>
+	                    <textarea rows="5" class="form-control" placeholder="Enter Address" value="{{request.address}}" ng-model="request.address" required="required"></textarea>
+	                </div>
+	            </div>
             </div>
         </form>
     </div>
